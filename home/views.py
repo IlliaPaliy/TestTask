@@ -4,30 +4,29 @@ from django.views.generic import ListView, DetailView
 from .models import User
 from users.models import Profile
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+
 
 
 def home(request):
 	return render(request, 'home/home.html')
 
-
 class UsersListView(ListView):
 	model = Profile
 	template_name = 'home/home.html'
 	context_object_name = 'users'
-	
 	def get_queryset(self):
-		return Profile.objects.all().exclude(user = self.request.user)
+		return Profile.objects.all()
 
 class UsersDetailView(DetailView):
 	model = User
 	template_name = 'home/profile_detail.html'
 
-
 	def get_object(self, **kwargs):
 		pk = self.kwargs.get('pk')
 		view_profile = User.objects.get(pk=pk)
 		return view_profile
-
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
 		view_profile = self.get_object()
@@ -59,6 +58,7 @@ def follow_action(request):
 
 		return redirect(request.META.get('HTTP_REFERER'))
 	return redirect('profile_info')
+
 
 def random_picture(request):
 	return render(request, 'home/picture.html')

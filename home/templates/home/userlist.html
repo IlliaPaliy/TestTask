@@ -2,7 +2,6 @@
 {%block content%}
 <div class="content-section">
 	<h1 class="font-weight-bold mt-4">Users that currently existing:</h1>
-	{%if user.is_authenticated%}
 	<ul>
 	{%for profile in users%}
 		<li>	
@@ -13,7 +12,4 @@
 		</li>
 	{%endfor%}
 	</ul>
-	{%else%}
-	<p class="text">First you need to <a href="{%url 'login'%}">log in</a> to see the list of users.</p>
-	{%endif%}
 {%endblock content%}
