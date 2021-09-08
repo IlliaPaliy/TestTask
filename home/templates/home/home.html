@@ -1,0 +1,15 @@
+{%extends "home/base.html"%}
+{%block content%}
+<div class="content-section">
+	<h1 class="font-weight-bold mt-4">Users that currently existing:</h1>
+	<ul>
+	{%for profile in users%}
+		<li>	
+			<article class="media content-section ml-4">
+				<img class="account-img align-self-center" src="{{profile.avatar.url}}">
+				<h2 class="username-text mt-3"><a class="article title" href="{%url 'profile_info' profile.user.id%}">{{profile.user.username}}</a></h2>
+			</article>
+		</li>
+	{%endfor%}
+	</ul>
+{%endblock content%}

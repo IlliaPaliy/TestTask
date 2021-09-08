@@ -1,0 +1,26 @@
+{%extends "home/base.html"%}
+{%load crispy_forms_tags%}  
+{%block content%}
+    <div class="content-section">
+        <h1 class="border-bottom ml-3">Profile info</h1>
+        <div class="media">
+            <img class="account-img align-self-center ml-3" src="{{user.profile.avatar.url}}" alt="User's avatar">
+            <div class="media-body">
+                <h1 class="profile-header lead ml-3">{{user.username}}</h1>
+                <p class="text-primary ml-3">Name: <span class="text-muted">{{user.profile.name}}</p>
+                <p class="text-primary ml-3">Surname: <span class="text-muted">{{user.profile.surname}}</p>
+                <p class="text-primary ml-3">E-mail: <span class="text-muted">{{user.email}}</p>
+                <p class="text-nowrap">{{user.profile.bio}}</p>
+            </div>
+        </div>
+        <a class="badge badge-info mt-2 ml-3"href="{%url 'change_profile'%}">Change profile</a>
+    </div>
+    <div class="content-section mt-4">
+        <h1 class="border-bottom ml-3">Users you follow</h1>
+        <ul>
+        {%for follower in followers%}
+        <li><a href="{%url 'profile_info' follower.id%}">{{follower.username}}</a></li>
+        {%endfor%}
+        </ul>
+    </div>
+{%endblock content%}

@@ -1,0 +1,22 @@
+{%extends "home/base.html"%}
+{%load crispy_forms_tags%}  ZZ
+{%block content%}
+    <div class="content-section">
+        <form method="POST" enctype="multipart/form-data">
+            {%csrf_token%}
+            <fieldset class="form-group">
+            <legend class="border-bottom">Change info about user</legend>
+                {{userform|crispy}}
+                {{profileform|crispy}}
+            <div class="row">
+                 <img class="account-img align-self-center" src="{{user.profile.avatar.url}}" alt="User's avatar">
+                 {{avatarform|crispy}}
+            </div>
+            </fieldset>
+            <div class="form-group">
+                <button type="submit" class="btn btn-secondary ml-3">Save</button>
+                <a class="badge badge-info float-right mt-2 mr-3" href="{%url 'profile'%}">Back to profile</a>
+            </div>
+        </form>
+    </div>
+{%endblock content%}

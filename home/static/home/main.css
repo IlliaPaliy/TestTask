@@ -1,0 +1,21 @@
+html{
+	font-size: 1.2rem;
+}
+body {
+	background: #b8cff5;
+}
+.content-section {
+	background: #fff;
+	margin: 40px 150px;
+	padding: 10px 20px;
+	border: 1px solid #dddddd;
+	border-radius: 8px;
+	margin-bottom: 20px;
+}
+.badge-info, .badge-success{
+	font-size:  20px;
+	width: 180px;
+}
+li{
+	width:fit-content;
+}

@@ -1,0 +1,59 @@
+{%extends "home/base.html"%}
+{%block content%}
+    <div class="content-section">
+        <h1 class="border-bottom ml-3">Profile info</h1>
+        <div class="media">
+            <img class="account-img align-self-center ml-3" src="{{object.profile.avatar.url}}" alt="User's avatar">
+            <div class="media-body">
+                <p class="profile-header lead ml-3">{{object.username}}</p>
+                <p class="text-secondady ml-3">Name: <span class="text-muted">{{object.profile.name}}</span></p>
+                <p class="text-secondady ml-3">Surname: <span class="text-muted">{{object.profile.surname}}</span></p>
+                <p class="text-secondady ml-3">E-mail: <span class="text-muted">{{object.email}}</span></p>
+                <p>{{object.profile.bio}}</p>
+            </div>
+        </div>
+        {%if request.user == object%}
+        <div>
+            <a class="badge badge-info mt-2 ml-3"href="{%url 'change_profile'%}">Change profile</a>
+        </div>
+        {%elif follow%}
+        <div>
+            <form action="{%url 'following'%}" method="POST">
+            {%csrf_token%}
+                <input type="hidden" name="profile_pk" value="{{object.pk}}">
+                <button type="submit" class="btn btn-outline-danger btn-large">Unfollow</button>
+            </form>
+            
+        </div>
+        {%else%}
+        <div>
+            <button type="button" class="btn btn-outline-success btn-large" data-toggle="modal" data-target="#followModal">
+                Follow
+            </button>
+            <div class="modal fade" id="followModal" tabindex="-1" role="dialog" aria-labelledby="Following user confirmation" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Following user</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                        <div class="modal-body">
+                        <p>Do you want to follow user {{object.username}}?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <form action="{%url 'following'%}" method="POST">
+                                {%csrf_token%}
+                                <input type="hidden" name="profile_pk" value="{{object.pk}}">
+                                <button type="submit" class="btn btn-primary">Yes</button>                                
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {%endif%}
+    </div>
+{%endblock content%}
