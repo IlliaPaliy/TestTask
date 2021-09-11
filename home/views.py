@@ -15,9 +15,9 @@ def home(request):
 class UsersListView(ListView):
 	model = Profile
 	template_name = 'home/home.html'
-	context_object_name = 'users'
+	context_object_name = 'profiles'
 	def get_queryset(self):
-		return Profile.objects.all()
+		return Profile.objects.all().exclude(user = self.request.user)
 
 class UsersDetailView(DetailView):
 	model = User

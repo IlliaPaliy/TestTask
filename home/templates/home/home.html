@@ -4,14 +4,14 @@
 	<h1 class="font-weight-bold mt-4">Users that currently existing:</h1>
 	{%if user.is_authenticated%}
 	<ul>
-	{%for profile in users%}
+		{%for profile in profiles%}
 		<li>	
 			<article class="media content-section ml-4">
 				<img class="account-img align-self-center" src="{{profile.avatar.url}}">
 				<h2 class="username-text mt-3"><a class="article title" href="{%url 'profile_info' profile.user.id%}">{{profile.user.username}}</a></h2>
 			</article>
 		</li>
-	{%endfor%}
+		{%endfor%}
 	</ul>
 	{%else%}
 	<p class="text">First you need to <a href="{%url 'login'%}">log in</a> to see the list of users.</p>

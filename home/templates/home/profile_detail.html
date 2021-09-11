@@ -1,0 +1,56 @@
+{%extends "home/base.html"%}
+{%load crispy_forms_tags%}  
+{%block content%}
+    
+    <div class="modal fade" id="followModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">FollowUser</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            <div class="modal-body">
+            Do you want to follow user {{user.username}}? You will see him in your following list.
+            </div>
+            <div class="modal-footer">
+                <form action="{%url 'following'%}" method="POST">
+                {%csrf_token%}
+                <input type="hidden" name="profile_pk" value={{object.pk}}>
+                <button type="success" class="btn btn-primary">Yes</button>
+            </form>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="content-section">
+        <h1 class="border-bottom ml-3">Profile info</h1>
+        <div class="media">
+            <img class="account-img align-self-center ml-3" src="{{user.profile.avatar.url}}" alt="User's avatar">
+            <div class="media-body">
+                <h1 class="profile-header lead ml-3">{{user.username}}</h1>
+                <p class="text-primary ml-3">Name: <span class="text-muted">{{user.profile.name}}</span></p>
+                <p class="text-primary ml-3">Surname: <span class="text-muted">{{user.profile.surname}}</span></p>
+                <p class="text-primary ml-3">E-mail: <span class="text-muted">{{user.email}}</span></p>
+                <p class="text-nowrap">{{user.profile.bio}}</p>
+            </div>
+        </div>
+        <div>
+        {%if object == request.user%}
+        <a class="badge badge-info mt-2 ml-3"href="{%url 'change_profile'%}">Change profile</a>
+        
+        {%elif follow%}
+            <form action="{%url 'following'%}" method="POST">
+                {%csrf_token%}
+                <input type="hidden" name="profile_pk" value={{object.pk}}>
+                <button type="submit" class="btn btn-danger">Unfollow</button> 
+            </form>
+        {%else%}
+            <button class="btn btn-success" data-toggle="modal" data-target="#followModal">Follow</button>
+        {%endif%}
+        </div>
+    </div>
+{%endblock content%}

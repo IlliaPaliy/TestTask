@@ -12,8 +12,9 @@
                 <p class="text-primary ml-3">E-mail: <span class="text-muted">{{user.email}}</p>
                 <p class="text-nowrap">{{user.profile.bio}}</p>
             </div>
+            <a class="badge badge-info mt-2 ml-3"href="{%url 'change_profile'%}">Change profile</a>
+            <a class="badge badge-warning" href="{%url 'password_reset' %}">Reset password</a>
         </div>
-        <a class="badge badge-info mt-2 ml-3"href="{%url 'change_profile'%}">Change profile</a>
     </div>
     <div class="content-section mt-4">
         <h1 class="border-bottom ml-3">Users you follow</h1>

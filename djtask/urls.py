@@ -4,13 +4,13 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from users import views as usersviews
-from home.views import UsersDetailView
+from home.views import UsersListView, UsersDetailView
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('home.urls')),
-    path('home/', include('home.urls'), name='home'),
+    path('home/', UsersListView.as_view(), name='home'),
     path('register/', usersviews.register, name="register"),
     path('login/', authviews.LoginView.as_view(template_name='users/login.html'), name='login'),
     path('logout/', authviews.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
