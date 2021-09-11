@@ -12,10 +12,11 @@ body {
 	border-radius: 8px;
 	margin-bottom: 20px;
 }
-.badge-info, .badge-success{
-	font-size:  20px;
-	width: 180px;
+.badge-info, .badge-success, .badge-warning{
+	font-size:  30px;
+	width: 250px;
 }
+
 li{
 	width:fit-content;
 }
